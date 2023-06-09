@@ -1,23 +1,74 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useStore from "../store/store";
+import React, { useEffect } from "react";
 
-export default function Demostration() {
-  const count = useStore((state) => state.count);
-  const inc = useStore((state) => state.inc);
-  console.log(count);
+export default function Demostration({
+  allProducts,
+  getAllProducts,
+  oneProduct,
+  getOneProduct,
+  user,
+  getUser,
+  token,
+  login,
+  logout
+}) {
+  useEffect(() => {
+    getAllProducts();
+    getOneProduct("6483501af4145b9da4a0143d");
+    getUser("joakin@mt.com");
+  }, []);
+
+  const sendToken = () => {
+    login("prueba1234");
+  };
+
+  const deleteToken = () => {
+    logout();
+  };
+
+  console.log(allProducts);
+  console.log(oneProduct);
+  console.log(user);
+  console.log(token);
+
   return (
-    <div className="bg-black h-screen w-screen text-white flex flex-col justify-center items-center">
-      <h1>Demostration</h1>
-      <Link
-        to="/"
-        className="hover:text-cyan-500 transition-colors"
-        href=""
-      >
-        Link 1
-      </Link>
-      <span>{count}</span>
-      <button onClick={inc}>one up</button>
+    <div className="bg-black w-full h-screen text-white text-center flex justify-center gap-4">
+      <div className="text-blue-600" id="products use an array">
+        <h2>Products:</h2>
+        <ul>
+          {allProducts?.map((product, index) => (
+            <li key={index}>{product._id}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="text-red-600" id="product use a object">
+        <h2>Product:</h2>
+        {oneProduct && (
+          <div>
+            <p>{oneProduct._id}</p>
+          </div>
+        )}
+      </div>
+
+      <div className="text-yellow-600" id="user use a object">
+        <h2>User:</h2>
+        {user && (
+          <div>
+            <p>{user._id}</p>
+          </div>
+        )}
+      </div>
+
+      <div className="text-orange-600" id="token use a object">
+        <h2>Token:</h2>
+        {user && (
+          <div>
+            <button onClick={sendToken}>Login</button>
+            <p>{token}</p>
+            <button onClick={deleteToken}>Logout</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
