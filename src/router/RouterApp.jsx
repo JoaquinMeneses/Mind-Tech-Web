@@ -24,6 +24,7 @@ export default function RouterApp() {
     <Routes>
       <Route element={<App />}>
         <Route path="/" element={<Index />} />
+        <Route path="/details" element= {<Details/>} />
       </Route>
       <Route path="/register/login" element={<Login />} />
       <Route
@@ -42,7 +43,8 @@ export default function RouterApp() {
           />
         }
       />
-      <Route path="/store" element={<Store />} />
+      <Route path="/store" element= {<Store/>} />
+      <Route path="/admin" element= {<Admin/>} />
     </Routes>
   );
 }
