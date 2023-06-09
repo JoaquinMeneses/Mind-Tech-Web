@@ -28,7 +28,12 @@ export default function RouterApp() {
         <Route path="/details" element={<Details />} />
       </Route>
       <Route path="/register/login" element={<Login />} />
-      <Route path="/store" element={<Store />} />
+      <Route
+        path="/store"
+        element={
+          <Store allProducts={allProducts} getAllProducts={getAllProducts} />
+        }
+      />
       <Route path="/admin" element={<Admin />} />
       <Route
         path="/demostration"
