@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import App from "../App";
-import AdminPanel from "../pages/AdminPanel";
 import Demostration from "../pages/Demostration";
 import Index from "../pages/Index";
 import Login from "../pages/login";
@@ -20,16 +19,17 @@ export default function RouterApp() {
     getUser,
     token,
     login,
-    logout
+    logout,
   } = useStore();
-
   return (
     <Routes>
       <Route element={<App />}>
         <Route path="/" element={<Index />} />
-        <Route path="/details" element= {<Details/>} />
+        <Route path="/details" element={<Details />} />
       </Route>
       <Route path="/register/login" element={<Login />} />
+      <Route path="/store" element={<Store />} />
+      <Route path="/admin" element={<Admin />} />
       <Route
         path="/demostration"
         element={
@@ -46,8 +46,6 @@ export default function RouterApp() {
           />
         }
       />
-      <Route path="/store" element= {<Store/>} />
-      <Route path="/admin" element= {<Admin/>} />
     </Routes>
   );
 }
