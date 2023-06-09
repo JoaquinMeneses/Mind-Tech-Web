@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import CardStore from '../components/CardStore'
-
+import axios from 'axios'
 
 
 export default function Store() {
@@ -9,7 +9,7 @@ export default function Store() {
 
     const [menuFilter, setMenuFilter] = useState(false)
     const [menuSort, setMenuSort] = useState(false)
-
+    const[input, setInput] = useState([])
     const clickFilter = () => {
         setMenuFilter(!menuFilter)
     }
@@ -17,8 +17,24 @@ export default function Store() {
        setMenuSort(!menuSort)
     }
 
-  
 
+
+    useEffect(()=>{
+       axios.get('http://localhost:3000/products/all')
+      .then(response=>{
+            setInput(response.data)
+            
+            
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    }, [])
+    
+    
+    
+
+       console.log(input)
 
     return (
 
@@ -106,7 +122,7 @@ export default function Store() {
 
                 </div>
                 <div className=' w-full min-h-[140vh] flex flex-col items-center justify-around' >
-                 <CardStore  />  
+                 <CardStore/>  
                 </div>
             </div> 
 
@@ -173,7 +189,7 @@ export default function Store() {
                         </div>
 
                         <div className='flex items-center justify-evenly border border-blac  w-[20vw] h-[6vh] rounded-[15px]  text-[#00000083] bg-[#9797974e] '>
-                            <input  placeholder='Search...' className='bg-transparent p-2 placeholder:text-[#00000083]  w-[15vw] h-[6vh] rounded-[15px]' type="search" name="" id="" />
+                            <input onKeyUp={(e)=>handleSearch(e)}  placeholder='Search...' className='bg-transparent p-2 placeholder:text-[#00000083]  w-[15vw] h-[6vh] rounded-[15px]' type="search" name="" id="" />
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6  h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                             </svg>
@@ -181,7 +197,7 @@ export default function Store() {
                         </div>
                     </div>
                     <div className='w-full min-h-[90vh]  flex flex-col items-center border-l border-black '>
-                      <CardStore/>
+                      <CardStore search={input?.products}/>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import App from "../App";
+import AdminPanel from "../pages/AdminPanel";
 import Demostration from "../pages/Demostration";
 import Index from "../pages/Index";
 import Login from "../pages/login";
+import Details from "../pages/details";
 import Store from "../pages/Store";
+import Admin from "../pages/AdminPanel";
 
 import useStore from "../store/store";
 

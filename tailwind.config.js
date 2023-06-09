@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       screens:{
-        'mob': {'min': '320px', 'max': '639px'}
+        'mob': {'min': '320px', 'max': '639px'},
+        'tl': {'min': '768px', 'max': '1439px'}
       },
       fontFamily: {
         'montserrat': ['Montserrat', 'sans-serif'],
