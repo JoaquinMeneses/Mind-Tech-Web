@@ -1,10 +1,63 @@
 import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
+import axios from "axios";
+import apiUrl from "../../api";
 
-export default function login() {
+import useStore from "../store/store";
+
+export default function AuthForm() {
+  const navigate = useNavigate();
+
+  const { login } = useStore();
+
   const [pages, setPages] = useState(true);
+
+  const name = useRef();
+  const email = useRef();
+  const password = useRef();
+
+  const sendLogin = (e) => {
+    e.preventDefault();
+    let data = {
+      email: email.current.value,
+      password: password.current.value,
+    };
+    axios
+      .post(apiUrl + "users/login", data)
+      .then((res) => {
+        console.log(res.data.message);
+        login(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("/store");
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  };
+
+  const sendRegister = (e) => {
+    e.preventDefault();
+    let data = {
+      name: name.current.value,
+      email: email.current.value,
+      password: password.current.value,
+    };
+    axios
+      .post(apiUrl + "users/register", data)
+      .then((res) => {
+        console.log(res.data.message);
+        login(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("auth-form");
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  };
 
   function handleClick() {
     setPages(!pages);
@@ -25,7 +78,6 @@ export default function login() {
             TECNHO
           </h2>
         </div>
-
         {pages == true ? (
           <>
             <div className="bg-[#D9D9D9] h-[full] sm:h-[95%] w-full rounded-tl-[60px] sm:w-[95%] sm:rounded-[40px] flex mob:flex-col mob:items-center ">
@@ -40,8 +92,7 @@ export default function login() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-3"
                         type="email"
-                        name=""
-                        id=""
+                        ref={email}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-5 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -56,8 +107,7 @@ export default function login() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-3"
                         type="password"
-                        name=""
-                        id=""
+                        ref={password}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-5 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -75,11 +125,12 @@ export default function login() {
                     />{" "}
                     SIGN IN WITH GOOGLE
                   </button>
-                  <input
+                  <button
                     className="bg-black rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[8px] text-[3vh]"
-                    type="submit"
-                    value="SIGN IN"
-                  />
+                    onClick={sendLogin}
+                  >
+                    SIGN IN
+                  </button>
                 </form>
                 <div className="font-semibold flex flex-col items-center justify-center text-black mt-5">
                   <p>You don't have an account yet?</p>
@@ -137,8 +188,7 @@ export default function login() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-2"
                         type="text"
-                        name=""
-                        id=""
+                        ref={name}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-4 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -153,8 +203,7 @@ export default function login() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-2"
                         type="email"
-                        name=""
-                        id=""
+                        ref={email}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-4 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -169,8 +218,7 @@ export default function login() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-2"
                         type="password"
-                        name=""
-                        id=""
+                        ref={password}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-4 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -188,11 +236,12 @@ export default function login() {
                     />{" "}
                     SIGN IN WITH GOOGLE
                   </button>
-                  <input
-                    className="bg-black rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[8px] text-[3vh] sm:text-[4vh]"
-                    type="submit"
-                    value="SIGN UP"
-                  />
+                  <button
+                    className="bg-black rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[8px] text-[3vh]"
+                    onClick={sendRegister}
+                  >
+                    SIGN UP
+                  </button>
                 </form>
                 <div className="pt-2 font-semibold flex flex-col items-center justify-center text-black">
                   <p>Do you already have an account?</p>

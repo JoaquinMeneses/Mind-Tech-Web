@@ -32,13 +32,13 @@ export default function Store({ allProducts, getAllProducts }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                 />
               </svg>
@@ -98,13 +98,13 @@ export default function Store({ allProducts, getAllProducts }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                 />
               </svg>
@@ -200,11 +200,11 @@ export default function Store({ allProducts, getAllProducts }) {
                 className="w-full h-full pl-4 rounded-[15px] bg-[#9797974e] text-[#00000083] "
                 name="select"
               >
-                <option value="" disabled selected hidden>
+                <option disabled hidden>
                   Sort By
                 </option>
                 <option value="value1">All Products</option>
-                <option value="value2">Max Price </option>
+                <option value="value2">Max Price</option>
                 <option value="value3">Min Price</option>
               </select>
             </div>
@@ -222,13 +222,13 @@ export default function Store({ allProducts, getAllProducts }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-6  h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                 />
               </svg>
