@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CardStore({ allProducts }) {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const goDetails = (id) => {
     navigate("/details/" + id);
   };
@@ -20,8 +20,8 @@ export default function CardStore({ allProducts }) {
           />
           <div className="flex flex-col items-center md:w-[50%] lg:w-[60%] md:h-full md:items-start md:p-2 md:justify-between lg:p-4">
             <p
-              className="p-2 text-start text-[12px] md:p-0 md:text-left lg:text-[14px]"
-              onClick={goDetails}
+              className="cursor-pointer p-2 text-start text-[12px] md:p-0 md:text-left lg:text-[14px]"
+              onClick={() => goDetails(item._id)}
             >
               {item.name}
             </p>

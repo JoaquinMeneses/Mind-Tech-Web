@@ -45,7 +45,7 @@ export default function Demostration({
         <h2>Product:</h2>
         {oneProduct && (
           <div>
-            <p>{oneProduct._id}</p>
+            <p>{oneProduct.name}</p>
           </div>
         )}
       </div>

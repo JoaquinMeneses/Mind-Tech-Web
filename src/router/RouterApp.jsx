@@ -25,7 +25,7 @@ export default function RouterApp() {
     <Routes>
       <Route element={<App />}>
         <Route path="/" element={<Index />} />
-        <Route path="/details" element={<Details />} />
+        <Route path="/details/:id" element={<Details />} />
       </Route>
       <Route path="/auth-form" element={<AuthForm />} />
       <Route
