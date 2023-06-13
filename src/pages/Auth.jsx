@@ -163,7 +163,7 @@ export default function AuthForm() {
               </div>
               <img
                 className="mob:hidden w-[50%]  rounded-r-[30px]"
-                src="https://i.pinimg.com/564x/9a/68/ba/9a68ba8e188d4c3faad903d774320579.jpg"
+                src="https://i.postimg.cc/SR5y1wX9/login.png"
                 alt=""
               />
             </div>
@@ -173,7 +173,7 @@ export default function AuthForm() {
             <div className="bg-[#D9D9D9] h-[full] sm:h-[95%] w-full rounded-tl-[60px] sm:w-[95%] sm:rounded-[50px] flex mob:flex-col mob:items-center ">
               <img
                 className="mob:hidden w-[46%] rounded-[50px]"
-                src="../public/register.png"
+                src="https://i.postimg.cc/vBZgJwm2/register.jpg"
                 alt=""
               />
               <div className="sm:flex sm:flex-col mob:w-[100%] sm:w-[50%] sm:items-center">
