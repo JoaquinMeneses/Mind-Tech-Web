@@ -27,10 +27,12 @@ const useStore = create((set) => ({
     try {
       const response = await axios.get(apiUrl + "users/one?one=" + user);
       set({ user: response.data.user });
+      localStorage.setItem("user", JSON.stringify(response.data.user));
     } catch (error) {
       console.error("Error fetching product:", error);
     }
   },
+
   login: async (token) => {
     try {
       set({ token: token });
