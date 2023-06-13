@@ -22,7 +22,15 @@ const useStore = create((set) => ({
     }
   },
   token: localStorage.getItem("token"),
-  user: JSON.parse(localStorage.getItem("user")),
+  user: undefined,
+  getUser: async (user) => {
+    try {
+      const response = await axios.get(apiUrl + "users/one?one=" + user);
+      set({ user: response.data.user });
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
+  },
   login: async (token) => {
     try {
       set({ token: token });
@@ -46,15 +54,15 @@ const useStore = create((set) => ({
   },
   selectCheckboxes: [],
   setSelectCheckboxes: (checkboxes) =>
-  set((state) => ({
-  selectCheckboxes: checkboxes,
+    set((state) => ({
+      selectCheckboxes: checkboxes,
     })),
   deleteProducts: async (dataDelete) => {
     try {
-        await axios.delete('http://localhost:3000/products/delete', dataDelete);
-        console.log('borrado con exito');
-      } catch (err) {
-        console.log(err);
+      await axios.delete("http://localhost:3000/products/delete", dataDelete);
+      console.log("borrado con exito");
+    } catch (err) {
+      console.log(err);
     }
   },
   createProduct: async (newProduct) => {
@@ -74,7 +82,6 @@ const useStore = create((set) => ({
       throw new Error(error.message);
     }
   },
-
 }));
 
 export default useStore;

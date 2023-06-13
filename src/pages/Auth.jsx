@@ -10,7 +10,7 @@ import useStore from "../store/store";
 export default function AuthForm() {
   const navigate = useNavigate();
 
-  const { login } = useStore();
+  const { login, getUser } = useStore();
 
   const [pages, setPages] = useState(true);
 
@@ -30,7 +30,7 @@ export default function AuthForm() {
         console.log(res.data.message);
         login(res.data.token);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        getUser(res.data.user.email);
         navigate("/store");
       })
       .catch((err) => {
@@ -51,7 +51,6 @@ export default function AuthForm() {
         console.log(res.data.message);
         login(res.data.token);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/auth-form");
       })
       .catch((err) => {

@@ -27,7 +27,6 @@ export default function Account() {
         console.log(res.data.message);
         logout();
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
         navigate("/");
       })
       .catch((err) => {

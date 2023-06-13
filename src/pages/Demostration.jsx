@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useTrail, animated } from "react-spring";
+import CardStore from "../components/CardStore";
 
 export default function Demostration({
   allProducts,
@@ -9,11 +11,11 @@ export default function Demostration({
   getUser,
   token,
   login,
-  logout
+  logout,
 }) {
   useEffect(() => {
     getAllProducts();
-    getOneProduct("64835a355c2bd36e9a48d5e0");
+    getOneProduct("64879ececa4be7eb46d3acdc");
     getUser("joakin@mt.com");
   }, []);
 
@@ -30,15 +32,22 @@ export default function Demostration({
   console.log(user);
   console.log(token);
 
+  // Configura las animaciones utilizando React Spring
+  const trail = useTrail(allProducts.length, {
+    from: { opacity: 0, y: -100 },
+    to: { opacity: 1, y: 0 },
+    config: { mass: 1, tension: 200, friction: 20 },
+  });
+
   return (
     <div className="bg-black w-full h-screen text-white text-center flex justify-center gap-4">
-      <div className="text-blue-600" id="products use an array">
+      <div className="text-blue-600" id="products">
         <h2>Products:</h2>
-        <ul>
-          {allProducts?.map((product, index) => (
-            <li key={index}>{product._id}</li>
-          ))}
-        </ul>
+        {trail.map((style, index) => (
+          <animated.div key={index} style={style}>
+            <CardStore allProducts={allProducts} />
+          </animated.div>
+        ))}
       </div>
 
       <div className="text-red-600" id="product use a object">
