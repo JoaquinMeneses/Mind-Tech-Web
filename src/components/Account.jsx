@@ -22,7 +22,7 @@ export default function Account() {
 
   const sendLogout = () => {
     axios
-      .post(apiUrl + "users/logout", { email: user.email })
+      .post(apiUrl + "users/logout", { email: user?.email })
       .then((res) => {
         console.log(res.data.message);
         logout();
@@ -59,7 +59,7 @@ export default function Account() {
           tabIndex={0}
           className="dropdown-content menu p-2 my-[1.425rem] shadow bg-[#000000f1] rounded-b-box w-52"
         >
-          <p>{user.name}</p>
+          <p>{user?.name}</p>
           <li>
             <a onClick={sendLogout}>Logout</a>
           </li>
