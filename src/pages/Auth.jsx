@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import axios from "axios";
 import apiUrl from "../../api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import useStore from "../store/store";
 
@@ -31,14 +33,20 @@ export default function AuthForm() {
         login(res.data.token);
         localStorage.setItem("token", res.data.token);
         getUser(res.data.user.email);
-        console.log(res.data.user.id)
+        console.log(res.data.user.id);
         axios.post(
           apiUrl + "carts/createCartOnLogin?userID=" + res.data.user.id
         );
         navigate("/store");
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        const errorMessages = err.response.data.message;
+        errorMessages.forEach((errorMessage) => {
+          toast.error(errorMessage);
+        });
+        const errors = errorMessages.map((errorMessage) => ({
+          message: errorMessage,
+        }));
       });
   };
 
@@ -58,7 +66,13 @@ export default function AuthForm() {
         navigate("/auth-form");
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        const errorMessages = err.response.data.message;
+        errorMessages.forEach((errorMessage) => {
+          toast.error(errorMessage);
+        });
+        const errors = errorMessages.map((errorMessage) => ({
+          message: errorMessage,
+        }));
       });
   };
 
@@ -69,6 +83,7 @@ export default function AuthForm() {
 
   return (
     <>
+      <ToastContainer />
       <div className="mob:hidden">
         <Navbar />
       </div>
