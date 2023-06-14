@@ -83,7 +83,6 @@ export default function AuthForm() {
 
   return (
     <>
-      <ToastContainer />
       <div className="mob:hidden">
         <Navbar />
       </div>
@@ -98,6 +97,7 @@ export default function AuthForm() {
         </div>
         {pages == true ? (
           <>
+            <ToastContainer position="top-right" />
             <div className="bg-[#D9D9D9] h-[full] sm:h-[95%] w-full rounded-tl-[60px] sm:w-[95%] sm:rounded-[40px] flex mob:flex-col mob:items-center ">
               <div className="sm:flex sm:flex-col mob:w-[100%] sm:w-[50%] sm:items-center">
                 <h1 className="flex justify-center text-black text-[3vh] tracking-[8px] font-bold py-8 sm:text-[6vh]">
@@ -189,6 +189,7 @@ export default function AuthForm() {
           </>
         ) : (
           <>
+            <ToastContainer position="top-left" />
             <div className="bg-[#D9D9D9] h-[full] sm:h-[95%] w-full rounded-tl-[60px] sm:w-[95%] sm:rounded-[50px] flex mob:flex-col mob:items-center ">
               <img
                 className="mob:hidden w-[46%] rounded-[50px]"
