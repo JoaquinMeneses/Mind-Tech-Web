@@ -84,6 +84,9 @@ const useStore = create((set) => ({
       throw new Error(error.message);
     }
   },
+
+  cart: undefined,
+  setCart: (parametro) => set({ cart: parametro }),
 }));
 
 export default useStore;

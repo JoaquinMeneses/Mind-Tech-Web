@@ -6,17 +6,8 @@ import useStore from "../store/store";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
 
   const { token } = useStore();
-
-  const cartItems = useStore((state) => state.cartItems);
-  const numerProducts= cartItems?.length
-
-  const handleCartClick = () => {
-    setCartOpen(!cartOpen)
-    setMenuOpen(!menuOpen);
-  };
 
   return (
     <div className="fixed z-10 bg-[#000000f1] text-white mx-auto px-5 py-3 flex  sm:justify-between items-center justify-between w-full h-[10vh]  font-montserrat">
@@ -77,23 +68,11 @@ export default function NavBar() {
           </li>
 
           <div className="hover:cursor-pointer mob:flex-col   flex justify-evenly sm:items-center sm:ml-2 w-[90px]    ">
-          <div className="flex">
-            <svg xmlns="http://www.w3.org/2000/svg" onClick={handleCartClick} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6  sm:w-4 sm:h-4 md:w-6 md:h-6 hover:border-b-[1px] hover:border-white z-index-1">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-            {numerProducts == 0? (null) :<p className="bg-red-600 p-1 h-[16px] rounded-[20vh] flex items-center text-[1.5vh] font-bold">{numerProducts}</p>}
-            </div>
-
+            {<Cart />}
             {token && <Account />}
           </div>
         </ul>
-        </div>
-        {cartOpen? <Cart cartOpen={cartOpen}  handleCartClick={handleCartClick} /> : null}
       </div>
-    );
-  }
-
-
-
-
-     
+    </div>
+  );
+}

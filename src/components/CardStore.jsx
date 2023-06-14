@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import useStore from "../store/store";
 
-export default function CardStore({ allProducts }) {
+export default function CardStore({ allProducts, cartID }) {
+  const { cart, setCart } = useStore();
+
   const navigate = useNavigate();
   const goDetails = (id) => {
     navigate("/details/" + id);
   };
 
-  const cartItems = useStore((state) => state.cartItems);
-  const setCartItems = useStore((state) => state.setCartItems);
-
-  const addToCart = (product) => {
-    const newCartItems = [...cartItems, product];
-    setCartItems(newCartItems);
+  const viewCart = (email) => {
+    axios
+      .get(`http://localhost:3000/carts/one?one=${email}`)
+      .then((res) => {
+        setCart(res.data.cart);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+  const addProduct = (cartID, productID) => {
+    axios
+      .post(
+        `http://localhost:3000/carts/addProduct?cartID=${cartID}&productID=${productID}`
+      )
+      .then((res) => {
+        setCart(res.data.cart);
+        viewCart("joakin@mt.com");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  useEffect(() => {
+    viewCart("joakin@mt.com"); // Pasar el correo como parámetro
+  }, []);
 
   return (
     <>
@@ -37,9 +59,12 @@ export default function CardStore({ allProducts }) {
             >
               {item.name}
             </p>
-            <p className="py-2">{item.price}</p>
+            <p className="py-2">${item.price}</p>
             <p className="text-[30px] tracking-[2px] font-light">☆☆☆☆☆</p>
-            <button onClick={() => addToCart(item)} className="bg-black w-[38vw] rounded-[10px] md:rounded-[23px] md:w-[20vw] p-2 h-[7vh] lg:w-[12vw]">
+            <button
+              onClick={() => addProduct(cart._id, item._id)}
+              className="bg-black w-[38vw] rounded-[10px] md:rounded-[23px] md:w-[20vw] p-2 h-[7vh] lg:w-[12vw]"
+            >
               <p className="text-white">+ Add to cart</p>
             </button>
           </div>
