@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useStore from "../store/store";
 
-export default function CardStore({ allProducts, cartID }) {
+export default function CardStore({ allProducts }) {
   const { cart, setCart, favorites, handleFavorite, removeFavorite } =
     useStore();
   console.log(favorites);
