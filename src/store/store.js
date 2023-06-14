@@ -87,6 +87,35 @@ const useStore = create((set) => ({
 
   cart: undefined,
   setCart: (parametro) => set({ cart: parametro }),
+
+  favorites : [],
+  handleFavorite: (itemId, itemName) => {
+    set((state) => {
+      if (state.favorites.some((fav) => fav._id === itemId)) {
+        return { favorites: state.favorites.filter((fav) => fav.id !== itemId) };
+      } else {
+
+        return { favorites: [...state.favorites, { _id: itemId, name: itemName }] };
+      }
+    });
+    axios
+      .post(`${apiUrl}products/rating`, { _id: itemId, name: itemName })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('Failed to add/remove favorite');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+
+  removeFavorite: (id) => {
+    set((state) => ({
+      favorites: state.favorites.filter((fav) => fav.id !== id),
+    }));
+  },
+
 }));
 
 export default useStore;

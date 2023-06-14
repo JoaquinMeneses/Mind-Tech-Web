@@ -33,7 +33,7 @@ const LineChart = () => {
     datasets: [
       {
         label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40, 30, 22,60, 30],
+        data: [35, 37, 42, 38, 32, 48, 40, 52, 60,78, 120],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1,

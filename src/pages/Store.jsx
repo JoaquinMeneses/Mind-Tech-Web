@@ -10,7 +10,8 @@ import useStore from "../store/store";
 
 export default function Store() {
   const { allProducts, getAllProducts } = useStore();
-
+  const [favorite, setFavorites] = useState([]);
+  
   // store all products
   useEffect(() => {
     if (!allProducts?.length) {
@@ -43,7 +44,6 @@ export default function Store() {
 
   // filters
   const animatedComponents = makeAnimated();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -146,6 +146,13 @@ export default function Store() {
     return filteredProducts;
   };
 
+
+  
+
+console.log(favorite)
+  
+
+  
   const filteredProducts = filterProducts(allProducts);
   return (
     <div className="w-full min-h-[100vh] bg-[#ffffff] flex flex-col">
@@ -157,7 +164,7 @@ export default function Store() {
           <div className="w-full h-[15vh]  flex justify-around items-center">
             <div
               onClick={clickFilter}
-              className="w-[45vw] h-[10vh] border flex justify-evenly items-center "
+              className="w-[45vw] h-[10vh] border flex justify-center items-center "
             >
               <p>Filters</p>
               <svg
@@ -166,7 +173,7 @@ export default function Store() {
                 viewBox="0 0 20 20"
                 aria-hidden="true"
                 focusable="false"
-                class="css-tj5bde-Svg"
+                className="css-tj5bde-Svg"
               >
                 <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
               </svg>
@@ -254,7 +261,7 @@ export default function Store() {
         <div className="p-4 fixed text-[#00000083] sm:w-[30%] md:w-[25%] lg:w-[20%] xl:w-[18%] sm:h-full overflow-y-auto">
           <div className="flex flex-col items-center">
             <p className="font-medium">Filters:</p>
-            <div className="w-full min-h-[30vh] py-4 flex flex-col justify-around">
+            <div className="w-full min-h-[10vh]  flex flex-col justify-around">
               <Select
                 options={categories?.map((category) => ({
                   value: category._id,
@@ -266,7 +273,7 @@ export default function Store() {
                 components={animatedComponents}
               />
             </div>
-            <div className="w-full min-h-[30vh] py-4 flex flex-col justify-around">
+            <div className="w-full min-h-[10vh]  flex flex-col justify-around">
               <Select
                 options={brands?.map((brand) => ({
                   value: brand._id,
@@ -278,12 +285,12 @@ export default function Store() {
                 components={animatedComponents}
               />
             </div>
-            <div className="w-full h-[20vh] flex flex-col items-start justify-around mb-4">
-              <p className="pl-2 font-medium">Price:</p>
+            <div className="w-full h-[20vh] flex flex-col items-center justify-center mb-4">
+              <p className="font-medium mb-4">Price:</p>
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col">
                   <input
-                    className="focus:outline-none w-[12vw] md:w-[10vw] lg:w-[8vw] h-[5vh] rounded-[5px] bg-white border border-[#727272a8] p-2 mb-2"
+                    className="focus:outline-none w-[12vw] md:w-[10vw] lg:w-[8vw] h-[5vh] rounded-[5px] bg-white border border-[#727272a8]  mb-2"
                     type="number"
                     value={minPrice}
                     onChange={handleMinPriceChange}
@@ -358,10 +365,13 @@ export default function Store() {
             </div>
           </div>
           <div className="w-full min-h-[90vh]  flex flex-col items-center border-l border-black ">
-            <CardStore allProducts={filteredProducts} />
+            <CardStore allProducts={filteredProducts}  />
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+
+//handleFavorite={handleFavorite} removeFavorite={removeFavorite} 

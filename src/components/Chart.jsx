@@ -1,10 +1,58 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import apiUrl from '../../api';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement} from 'chart.js';
 ChartJS.register(BarElement);
+
+
+
 const BarChart = () => {
+
+  const [rating, setRating] = useState();
+  const [users, setUsers] = useState();
+
+
+useEffect(() => {
+    axios.get(`${apiUrl}users/all`)
+      .then(response => {
+        const data = response.data.users;
+        setUsers(data); 
+      })
+      .catch(error => {
+        console.error(error);
+       
+      });
+  }, []);
+
+
+const usersAcount = users && users.filter(users => users.userCount !== 0).map(users => users.userCount)
+  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+ 
+
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/products/all')
+      .then(response => {
+        const data = response.data.products;
+        setRating(data);
+      })
+      .catch(error => {
+        console.error(error);
+
+      });
+  }, []);
+ 
+  const favs = rating && rating.filter(product => product.rating !== 0).map(product => product.rating)
+  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+
+
+  
+
+
     const generateInteractions = () => {
-        return ['Favorites', 'Ratings', 'Brands', 'Logged users'];
+        return ['Users who added to favorites', 'Registered users', 'Top selling brands'];
       };
 
   const labels = generateInteractions(7);
@@ -13,7 +61,7 @@ const BarChart = () => {
     datasets: [
       {
         label: 'My First Dataset',
-        data: [20, 59, 80, 50, 56, 55, 40],
+        data: [favs, usersAcount, 10],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(255, 159, 64, 0.2)',

@@ -23,7 +23,8 @@ export default function RouterApp() {
     selectCheckboxes,
     setSelectCheckboxes,
     deleteProducts,
-    createProduct
+    createProduct,
+    useFavoritesStore
 
   } = useStore();
   return (
@@ -39,7 +40,7 @@ export default function RouterApp() {
           <Store allProducts={allProducts} getAllProducts={getAllProducts} />
         }
       />
-      <Route path="/admin"  element={<Admin allProducts={allProducts} getAllProducts={getAllProducts} deleteProducts={deleteProducts} createProduct={createProduct} />} />
+      <Route path="/admin"  element={<Admin useFavoritesStore={useFavoritesStore} allProducts={allProducts} getAllProducts={getAllProducts} deleteProducts={deleteProducts} createProduct={createProduct} />} />
       <Route
         path="/demostration"
         element={
