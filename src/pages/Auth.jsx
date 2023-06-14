@@ -31,6 +31,10 @@ export default function AuthForm() {
         login(res.data.token);
         localStorage.setItem("token", res.data.token);
         getUser(res.data.user.email);
+        console.log(res.data.user.id)
+        axios.post(
+          apiUrl + "carts/createCartOnLogin?userID=" + res.data.user.id
+        );
         navigate("/store");
       })
       .catch((err) => {
