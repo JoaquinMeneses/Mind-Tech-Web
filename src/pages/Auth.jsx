@@ -12,9 +12,12 @@ import useStore from "../store/store";
 export default function AuthForm() {
   const navigate = useNavigate();
 
-  const { login, getUser } = useStore();
+  const { login, getUser, user } = useStore();
 
   const [pages, setPages] = useState(true);
+
+  const emailLogin = useRef();
+  const passwordLogin = useRef();
 
   const name = useRef();
   const email = useRef();
@@ -23,8 +26,8 @@ export default function AuthForm() {
   const sendLogin = (e) => {
     e.preventDefault();
     let data = {
-      email: email.current.value,
-      password: password.current.value,
+      email: emailLogin.current.value,
+      password: passwordLogin.current.value,
     };
     axios
       .post(apiUrl + "users/login", data)
@@ -41,12 +44,18 @@ export default function AuthForm() {
       })
       .catch((err) => {
         const errorMessages = err.response.data.message;
-        errorMessages.forEach((errorMessage) => {
-          toast.error(errorMessage);
-        });
-        const errors = errorMessages.map((errorMessage) => ({
-          message: errorMessage,
-        }));
+        let errors = [];
+        if (Array.isArray(errorMessages)) {
+          errors = errorMessages.map((errorMessage) => ({
+            message: errorMessage,
+          }));
+          errorMessages.forEach((errorMessage) => {
+            toast.error(errorMessage);
+          });
+        } else {
+          errors = [{ message: errorMessages }];
+          toast.error(errorMessages);
+        }
       });
   };
 
@@ -61,9 +70,12 @@ export default function AuthForm() {
       .post(apiUrl + "users/register", data)
       .then((res) => {
         console.log(res.data.message);
-        login(res.data.token);
-        localStorage.setItem("token", res.data.token);
+        handleClick();
         navigate("/auth-form");
+        axios.post(apiUrl + "users/send-verification-email", {
+          email: data.email,
+        });
+        toast.success("Check your mailbox for account verification");
       })
       .catch((err) => {
         const errorMessages = err.response.data.message;
@@ -80,7 +92,6 @@ export default function AuthForm() {
     setPages(!pages);
     console.log(pages);
   }
-
   return (
     <>
       <div className="mob:hidden">
@@ -110,7 +121,7 @@ export default function AuthForm() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-3"
                         type="email"
-                        ref={email}
+                        ref={emailLogin}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-5 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -125,7 +136,7 @@ export default function AuthForm() {
                       <input
                         className="w-[100%] h-[6vh] sm:h-[7vh] bg-white rounded-lg sm:mt-3"
                         type="password"
-                        ref={password}
+                        ref={passwordLogin}
                       />
                       <img
                         className="w-[40px] h-[40px] sm:mt-5 ml-[-10%] mob:w-[30px] mob:h-[30px] mt-2 mr-1"
@@ -171,7 +182,6 @@ export default function AuthForm() {
                       />
                     </label>
                   </button>
-
                   <p>
                     Go back to{" "}
                     <Link className="font-bold" to="/">
@@ -283,7 +293,6 @@ export default function AuthForm() {
                       />
                     </label>
                   </button>
-
                   <p>
                     Go back to{" "}
                     <Link className="font-bold" to="/">
