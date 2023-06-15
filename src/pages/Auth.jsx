@@ -145,15 +145,6 @@ export default function AuthForm() {
                       />
                     </div>
                   </legend>
-                  <button className="bg-white rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[3px] text-black text-[2vh] font-bold flex items-center pl-5 gap-5 sm:mt-[6vh]">
-                    {" "}
-                    <img
-                      src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png"
-                      className="w-[35px] h-[35px] sm:mr-5 "
-                      alt=""
-                    />{" "}
-                    SIGN IN WITH GOOGLE
-                  </button>
                   <button
                     className="bg-black rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[8px] text-[3vh]"
                     onClick={sendLogin}
@@ -256,15 +247,6 @@ export default function AuthForm() {
                       />
                     </div>
                   </legend>
-                  <button className="bg-white rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[3px] text-black text-[2vh] font-bold flex items-center pl-5 gap-5 sm:mt-[2vh]">
-                    {" "}
-                    <img
-                      src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png"
-                      className="w-[35px] h-[35px] sm:mr-5 "
-                      alt=""
-                    />{" "}
-                    SIGN IN WITH GOOGLE
-                  </button>
                   <button
                     className="bg-black rounded-[20px] w-[80%] sm:h-[8vh] sm:w-[55%] h-[10vh] tracking-[8px] text-[3vh]"
                     onClick={sendRegister}
