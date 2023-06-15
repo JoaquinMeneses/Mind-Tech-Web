@@ -4,10 +4,16 @@ import axios from "axios";
 import useStore from "../store/store";
 
 export default function CardStore({ allProducts }) {
-  const { cart, setCart, favorites, handleFavorite, removeFavorite } =
-    useStore();
-    console.log(favorites);
-    console.log(cart)
+  const {
+    cart,
+    setCart,
+    favorites,
+    handleFavorite,
+    removeFavorite,
+    formatPrice,
+  } = useStore();
+  console.log(favorites);
+  console.log(cart);
   const navigate = useNavigate();
   const goDetails = (id) => {
     navigate("/details/" + id);
@@ -61,7 +67,7 @@ export default function CardStore({ allProducts }) {
             >
               {item.name}
             </p>
-            <p className="py-2">${item.price}</p>
+            <p className="py-2">{formatPrice(item.price)}</p>
             <p className="text-[30px] tracking-[2px] font-light">☆☆☆☆☆</p>
             <label className="swap swap-flip text-9xl">
               {/* this hidden checkbox controls the state */}
