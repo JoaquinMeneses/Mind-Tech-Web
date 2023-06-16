@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
 import Account from "./Account.jsx";
@@ -6,7 +6,7 @@ import useStore from "../store/store";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { token, cart } = useStore();
+  const { token,cart} = useStore();
 
   return (
     <div className="fixed z-10 bg-[#000000f1] text-white mx-auto px-5 py-3 flex  sm:justify-between items-center justify-between w-full h-[10vh]  font-montserrat">
@@ -67,14 +67,17 @@ export default function NavBar() {
           </li>
 
           <div className="hover:cursor-pointer mob:flex-col   flex justify-evenly sm:items-center sm:ml-2 w-[90px]    ">
-            <div className="mr-[-50px] mt-[-20px] z-1">
-              {cart?.products?.length && token ? (
+          <div className="mr-[-50px] mt-[-20px] z-1">
+          {cart?.products?.length && token ?(
                 <p className="z-50 flex justify-center items-center text-[1.5vh]  bg-red-600 rounded-full h-[15px] w-[15px]">
                   {cart?.products?.length}
                 </p>
-              ) : null}
+              ):(null) }
+              </div>
+              <div className="z-30">
+            {token && <Cart />}
             </div>
-            <div className="z-50">{token && <Cart />}</div>
+            
             {token && <Account />}
           </div>
         </ul>

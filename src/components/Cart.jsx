@@ -120,16 +120,16 @@ export default function Cart() {
           </label>
           
         </div>
-        <div className={`drawer-side open`}>
+        <div className={`drawer-side open`}  >
           <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-          <div className="flex flex-col p-4 w-80 min-h-full z-10 bg-black/90 text-base-content">
+          <div className="flex flex-col p-4 w-80 min-h-full z-40 bg-black/90 text-base-content">
             {/* Sidebar content here */}
             <h1 className="text-4xl font-bold text-center text-white mb-2">
               CART
             </h1>
             {cart?.products.map((item, index) => (
               <div
-                className="rounded-lg border-1 border-black bg-white p-1 mb-2"
+                className=" rounded-lg border-1 border-black bg-white p-1 mb-2"
                 key={index}
               >
                 <div className="flex justify-between">

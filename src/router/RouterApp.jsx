@@ -39,6 +39,7 @@ export default function RouterApp() {
         <Route path="/pending" element={<Pending />} />
       </Route>
       <Route path="/auth-form" element={<AuthForm />} />
+     
       <Route
         path="/store"
         element={

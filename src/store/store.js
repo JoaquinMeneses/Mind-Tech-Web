@@ -110,7 +110,10 @@ const useStore = create((set) => ({
       favorites: state.favorites.filter((fav) => fav.id !== id),
     }));
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 029a8c63d6fa995bd2f4c27188743c85773f694e
   formatPrice: (price) => {
     if (typeof price === "number") {
       return price.toLocaleString("en-US", {

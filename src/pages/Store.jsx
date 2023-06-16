@@ -266,6 +266,15 @@ console.log(favorite)
           <div className="flex flex-col items-center">
             <p className="font-medium">Filters:</p>
             <div className="w-full min-h-[8vh]  flex flex-col justify-around">
+            <Select
+                options={filterOptions}
+                onChange={handleFilterChange}
+                value={selectedFilter}
+                placeholder="Sort by:"
+                components={animatedComponents}
+              />
+              </div>
+            <div className="w-full min-h-[8vh]  flex flex-col justify-around">
               <Select
                 options={categories?.map((category) => ({
                   value: category._id,
@@ -289,21 +298,13 @@ console.log(favorite)
                 components={animatedComponents}
               />
             </div>
-            <div className="w-full h-[30vh] flex flex-col items-center justify-center mb-4">
-            <div className="mt-[18vh]">
-            <Select
-                options={filterOptions}
-                onChange={handleFilterChange}
-                value={selectedFilter}
-                placeholder="Sort by:"
-                components={animatedComponents}
-              />
-              </div>
+        
 
-              <p className="font-medium mt-5 mb-4">Price:</p>
+            <div className="w-full h-[30vh] flex flex-col items-center justify-center mb-4">
+              <p className="font-medium mt-[20%] mb-4">Price:</p>
 
               <div className="w-full flex justify-between items-center">
-                <div className="flex flex-col h-[30vh]">
+                <div className="flex flex-col items-center h-[30vh]">
                   <input
                     className="focus:outline-none w-[12vw] md:w-[10vw] lg:w-[8vw] h-[5vh] rounded-[5px] bg-white border border-[#727272a8] p-2  mb-2"
                     type="number"
@@ -313,14 +314,14 @@ console.log(favorite)
                   />
                   {minPrice && (
                     <button
-                    className="text-white border-2 bg-red-600 p-1 rounded-lg"
+                    className="w-[50%] text-white border-2 bg-red-600 p-1 rounded-lg"
                       onClick={() => setMinPrice("")}
                     >
                       Clear
                     </button>
                   )}
                 </div>{" "}
-                <div className="flex flex-col h-[30vh]">
+                <div className="flex flex-col items-center h-[30vh]">
 
                   <input
                     className="focus:outline-none w-[12vw] md:w-[10vw] lg:w-[8vw] h-[5vh] rounded-[5px] bg-white border border-[#727272a8] p-2 mb-2"
@@ -331,7 +332,7 @@ console.log(favorite)
                   />
                   {maxPrice && (
                     <button
-                      className="text-white border-2 bg-red-600 p-1 rounded-lg"
+                      className="w-[50%] text-white border-2 bg-red-600 p-1 rounded-lg"
                       onClick={() => setMaxPrice("")}
                     >
                       Clear
@@ -345,9 +346,9 @@ console.log(favorite)
 
         <div className="sm:w-[70%] md:w-[75%] lg:w-[80%] xl:w-[82%] sm:h-full flex flex-col  ">
           <div className="w-full h-[10vh]  flex"></div>
-          <div className="w-full h-[10vh] bg-[#ececec] pr-[30vw] md:pr-[20vw] lg:pr-[15vw] flex justify-around items-center fixed">
+          <div className="absolute w-full h-[10vh] bg-[#ececec] pr-[30vw] md:pr-[20vw] lg:pr-[15vw] flex justify-around items-center ">
 
-            <div className="z-10 flex items-center justify-evenly border border-blac  w-[60vw] h-[6vh] rounded-[15px]  text-[#00000083] bg-[#9797974e] ">
+            <div className="flex items-center justify-evenly border border-blac  w-[50vw] h-[6vh] rounded-[15px]  text-[#00000083] bg-[#9797974e] ">
               <input
                 className="bg-transparent p-2 placeholder:text-[#00000083]  w-[45vw] h-[6vh] rounded-[15px] focus:outline-none"
                 type="search"
