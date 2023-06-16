@@ -6,6 +6,7 @@ import AuthForm from "../pages/Auth";
 import Details from "../pages/details";
 import Store from "../pages/Store";
 import Admin from "../pages/AdminPanel";
+import Checkout from "../components/Checkout";
 
 import useStore from "../store/store";
 
@@ -31,6 +32,7 @@ export default function RouterApp() {
     <Routes>
       <Route element={<App />}>
         <Route path="/" element={<Index />} />
+      <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/details/:id" element={<Details />} />
       </Route>
       <Route path="/auth-form" element={<AuthForm />} />

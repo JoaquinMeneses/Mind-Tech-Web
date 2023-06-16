@@ -49,7 +49,7 @@ export default function Index() {
     fetchProducts();
   }, [currentPage]);
 
-console.log(products)
+
 
 
   const handlePrevPage = () => {

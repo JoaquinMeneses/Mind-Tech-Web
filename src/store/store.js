@@ -54,7 +54,7 @@ const useStore = create((set) => ({
     })),
   deleteProducts: async (dataDelete) => {
     try {
-      await axios.delete("http://localhost:3000/products/delete", dataDelete);
+      await axios.delete(`${apiUrl}products/delete`, dataDelete);
       console.log("borrado con exito");
     } catch (err) {
       console.log(err);
@@ -63,7 +63,7 @@ const useStore = create((set) => ({
   createProduct: async (newProduct) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/products/create",
+        `${apiUrl}products/create`,
         newProduct,
         {
           headers: {
@@ -73,8 +73,9 @@ const useStore = create((set) => ({
       );
       return response.data;
     } catch (error) {
-      console.error("Error creating product:", error);
-      throw new Error(error.message);
+      
+      console.log(error.response)
+      
     }
   },
   cart: undefined,
